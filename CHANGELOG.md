@@ -2,6 +2,15 @@
 
 Registrar entregas reais, indicando separadamente implementação e validação. Não marcar uma correção como concluída antes de executá-la e conferir o resultado.
 
+## 2026-10-27 — 0.3.0 — Comparação antes e depois
+
+- Implementada comparação entre relatórios de qualidade com classificação de variações e resultados inconclusivos.
+- Incluídas validação dos arquivos, contagens exatas, proteção contra mistura de demo/coleta real e conferência de ordem temporal.
+- Adicionados relatórios Markdown/JSON, CLI demonstrativa e código de saída opcional para regressões.
+- Adicionados sete testes locais e documentação em `docs/COMPARAR_RELATORIOS.md`.
+
+Validação: 26 testes locais passaram e demonstração executada. Nenhuma base foi alterada. Publicação descrita em `updates/005-comparacao-relatorios.md`.
+
 ## 2026-10-27 — Correção de compatibilidade com PostgreSQL 16
 
 - Substituída leitura das variáveis removidas lc_collate/lc_ctype pelo catálogo pg_database nos dois inventários.

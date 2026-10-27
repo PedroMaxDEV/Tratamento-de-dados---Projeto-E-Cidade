@@ -10,6 +10,8 @@ Já existe uma ferramenta executável de diagnóstico em Node.js, com geração 
 
 A versão 0.2.0 também oferece regras configuráveis de qualidade: nulos, textos vazios, duplicidades e referências sem correspondência. Veja o [guia de qualidade](docs/QUALIDADE_DE_DADOS.md) e o [texto da atualização 003](updates/003-qualidade-dados.md).
 
+A versão 0.3.0 acrescenta [comparação de relatórios antes e depois](docs/COMPARAR_RELATORIOS.md), com identificação de reduções, aumentos e resultados inconclusivos. [Texto da atualização 005](updates/005-comparacao-relatorios.md).
+
 ## Executar o código agora
 
 Com Node.js 22 ou superior, na pasta do projeto:
@@ -17,10 +19,11 @@ Com Node.js 22 ou superior, na pasta do projeto:
 ```powershell
 node src/cli.js --demo
 node src/qualidade-cli.js --demo
-node --test testes/diagnostico.test.js testes/qualidade.test.js
+node src/comparacao-cli.js --demo
+node --test testes/diagnostico.test.js testes/qualidade.test.js testes/comparacao.test.js
 ```
 
-Não é necessário instalar pacotes. Os dois primeiros comandos geram relatórios **sintéticos**, em subpastas exclusivas de `resultados-locais/`. O terceiro executa os 19 testes automatizados locais. Cinco testes adicionais de integração foram preparados para o GitHub com PostgreSQL 14 e 16; ainda não foram executados nesta máquina.
+Não é necessário instalar pacotes. Os três primeiros comandos geram relatórios **sintéticos**, em subpastas exclusivas de `resultados-locais/`. O último executa os 26 testes automatizados locais. Cinco testes adicionais de integração são executados no GitHub com PostgreSQL 14 e 16; não há PostgreSQL instalado nesta máquina.
 
 Para conectar a uma base PostgreSQL, siga [o guia da ferramenta](docs/FERRAMENTA_DIAGNOSTICO.md). Ela consulta metadados em transação somente leitura e não executa correções.
 

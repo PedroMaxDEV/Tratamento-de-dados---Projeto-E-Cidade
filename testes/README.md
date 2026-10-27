@@ -1,5 +1,7 @@
 # Testes do banco
 
+Atualização 0.3.0: execute a suíte completa com `node --test testes/diagnostico.test.js testes/qualidade.test.js testes/comparacao.test.js`. São 26 testes locais aprovados, incluindo sete verificações da comparação antes/depois. Os registros abaixo descrevem a entrega anterior de qualidade.
+
 Estado atual: 19 testes automatizados executados e aprovados em Node.js 22.14.0. Os cinco testes conectados ao PostgreSQL foram pulados localmente por falta do ambiente; estão configurados no GitHub para PostgreSQL 14 e 16. O inventário não substitui testes de qualidade dos dados.
 
 Execute `node --test testes/diagnostico.test.js testes/qualidade.test.js` na raiz. Os testes verificam regras de diagnóstico e qualidade, configurações, chaves compostas, contagens grandes, rejeição de coleta incompleta, escape de metadados no Markdown, argumentos do cliente, falhas e preservação de relatórios anteriores. A chamada ao PostgreSQL é simulada nesses testes.

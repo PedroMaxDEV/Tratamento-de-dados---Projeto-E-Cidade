@@ -1,6 +1,6 @@
 {
   "name": "ecidade-tratamento-dados",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Diagnóstico somente leitura do PostgreSQL para a equipe e-Cidade",
   "type": "module",
@@ -10,7 +10,8 @@
     "demo": "node src/cli.js --demo",
     "qualidade": "node src/qualidade-cli.js",
     "demo:qualidade": "node src/qualidade-cli.js --demo",
-    "test": "node --test testes/diagnostico.test.js testes/qualidade.test.js",
+    "comparar": "node src/comparacao-cli.js",
+    "test": "node --test testes/diagnostico.test.js testes/qualidade.test.js testes/comparacao.test.js",
     "test:integracao": "node --test testes/integracao/postgres.test.js"
   }
 }
