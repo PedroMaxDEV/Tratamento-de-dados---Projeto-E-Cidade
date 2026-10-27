@@ -7,8 +7,10 @@ SET LOCAL statement_timeout = '60s';
 SELECT current_database() AS banco, version() AS versao;
 SHOW server_encoding;
 SHOW client_encoding;
-SHOW lc_collate;
-SHOW lc_ctype;
+-- As variaveis lc_collate/lc_ctype foram removidas no PostgreSQL 16.
+SELECT datcollate AS lc_collate, datctype AS lc_ctype
+FROM pg_catalog.pg_database
+WHERE datname = current_database();
 
 -- Tabelas visiveis para a conta utilizada.
 SELECT table_schema, table_name, table_type

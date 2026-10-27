@@ -16,6 +16,10 @@ test('PostgreSQL: regras detectam as contagens esperadas na massa sintética', {
 
 test('PostgreSQL: inventário encontra tabelas, colunas e restrição não validada', { skip: !enabled }, () => {
   const rows = collectDatabase();
+  const metadata = rows.find(r => r.kind === 'metadata');
+  const expected = JSON.parse(executeReadOnlySql("BEGIN READ ONLY; SELECT row_to_json(d) FROM (SELECT datcollate AS collate, datctype AS ctype FROM pg_catalog.pg_database WHERE datname = current_database()) d; ROLLBACK;").trim());
+  assert.equal(metadata.collate, expected.collate);
+  assert.equal(metadata.ctype, expected.ctype);
   assert.ok(rows.some(r => r.kind === 'table' && r.schema === 'ecidade_qa' && r.name === 'pessoa' && !r.has_primary_key));
   assert.ok(rows.some(r => r.kind === 'constraint' && r.name === 'nome_nao_nulo' && !r.validated));
   assert.ok(rows.some(r => r.kind === 'column' && r.table_name === 'pessoa' && r.name === 'nome'));

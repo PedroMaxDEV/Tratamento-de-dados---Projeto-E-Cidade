@@ -6,8 +6,10 @@ SELECT row_to_json(r) FROM (
   SELECT 'metadata' AS kind, current_database() AS database,
          current_setting('server_version') AS server_version,
          current_setting('server_encoding') AS encoding,
-         current_setting('lc_collate') AS collate,
-         current_setting('lc_ctype') AS ctype
+         d.datcollate AS collate,
+         d.datctype AS ctype
+  FROM pg_catalog.pg_database d
+  WHERE d.datname = current_database()
 ) r;
 
 SELECT row_to_json(r) FROM (

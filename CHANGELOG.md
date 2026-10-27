@@ -2,6 +2,14 @@
 
 Registrar entregas reais, indicando separadamente implementação e validação. Não marcar uma correção como concluída antes de executá-la e conferir o resultado.
 
+## 2026-10-27 — Correção de compatibilidade com PostgreSQL 16
+
+- Substituída leitura das variáveis removidas lc_collate/lc_ctype pelo catálogo pg_database nos dois inventários.
+- Reforçada conferência dos valores de locale no teste de integração.
+- Desativado fail-fast na matriz PostgreSQL para obter resultados independentes nas versões 14 e 16.
+
+Validação: 19 testes locais passaram. A correção de integração aguarda novo push e execução no GitHub. Consulta às etapas da execução anterior confirmou falha na etapa de testes do PostgreSQL 16 e sucesso na etapa equivalente do 14; log SQL completo não acessível pela API sem autenticação.
+
 ## 2026-10-27 — 0.2.0 — Regras de qualidade
 
 - Implementadas regras not_null, not_blank, unique e foreign_key configuradas por JSON.
