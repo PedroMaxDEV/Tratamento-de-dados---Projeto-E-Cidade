@@ -1,0 +1,17 @@
+# Credenciais e bancos locais
+.env
+.env.*
+!.env.example
+*.dump
+*.backup
+*.sql.gz
+inventario-local.txt
+backups/
+dados-locais/
+resultados-locais/
+*.sql.bak
+*.log
+.pgpass
+pgpass.conf
+.DS_Store
+Thumbs.db
