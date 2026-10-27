@@ -15,3 +15,4 @@ resultados-locais/
 pgpass.conf
 .DS_Store
 Thumbs.db
+node_modules/

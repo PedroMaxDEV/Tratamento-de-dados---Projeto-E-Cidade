@@ -6,7 +6,20 @@ Objetivo da equipe: diagnosticar a base PostgreSQL do e-Cidade, propor tratament
 
 ## Estado desta entrega
 
-Esta é uma estrutura inicial de trabalho, não um banco já tratado. Nenhuma base foi restaurada ou alterada. As consultas ainda precisam ser executadas na cópia de desenvolvimento. Não foram identificadas duplicidades ou inconsistências em registros reais.
+Já existe uma ferramenta executável de diagnóstico em Node.js, com geração de relatórios JSON/Markdown, modo demonstrativo e testes automatizados. Nenhuma base real foi restaurada ou alterada. A coleta SQL ainda precisa ser validada na cópia de desenvolvimento do e-Cidade.
+
+## Executar o código agora
+
+Com Node.js 22 ou superior, na pasta do projeto:
+
+```powershell
+node src/cli.js --demo
+node --test testes/diagnostico.test.js
+```
+
+Não é necessário instalar pacotes. O primeiro comando gera relatórios com **metadados sintéticos**, em uma subpasta exclusiva de `resultados-locais/`. O segundo executa os testes automatizados.
+
+Para conectar a uma base PostgreSQL, siga [o guia da ferramenta](docs/FERRAMENTA_DIAGNOSTICO.md). Ela consulta metadados em transação somente leitura e não executa correções.
 
 - [Plano de trabalho e critérios de aceite](docs/PLANO.md)
 - [Integração das três equipes](docs/INTEGRACAO.md)
@@ -17,15 +30,17 @@ Esta é uma estrutura inicial de trabalho, não um banco já tratado. Nenhuma ba
 - [Ambiente e versão de referência](docs/AMBIENTE.md)
 - [Dicionário de dados para preencher](docs/DICIONARIO_DE_DADOS.md)
 - [Regras para contribuir](CONTRIBUTING.md)
+- [Título e descrição desta atualização](updates/002-diagnostico.md)
 
 ## Comece por aqui
 
-Esta pasta já pode ser publicada como o repositório auxiliar da equipe. A primeira entrega é a estrutura de trabalho e o script de inventário; não representa uma correção aplicada ao e-Cidade.
+Esta pasta pode ser publicada como o repositório auxiliar da equipe. A segunda entrega acrescenta o diagnóstico executável; não representa uma correção aplicada ao e-Cidade.
 
 Leia `docs/PUBLICAR_NO_GITHUB.md` para fazer o primeiro envio e os próximos commits. Depois, preencha `docs/AMBIENTE.md`, escolha o módulo piloto e execute o diagnóstico em uma base de desenvolvimento.
 
 ```text
 .github/              Modelos de issues e pull requests
+src/                  Ferramenta executável de diagnóstico
 docs/                 Plano, ambiente, dicionário e integração
 modelos/              Fichas para documentar cada tratamento
 relatorios/           Evidências revisadas, sem dados pessoais
@@ -33,6 +48,7 @@ sql/diagnostico/      Consultas de inspeção
 sql/migracoes/        Futuras alterações versionadas
 sql/reversao/         Futuros procedimentos de reversão
 testes/               Critérios e casos de teste
+updates/              Título e descrição de cada atualização
 CHANGELOG.md          Histórico das entregas
 ```
 
