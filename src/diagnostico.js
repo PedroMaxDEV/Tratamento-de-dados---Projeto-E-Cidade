@@ -34,10 +34,10 @@ export function parseCollection(output) {
   return records;
 }
 
-export function collectDatabase({ psql = 'psql', env = process.env, runner = spawnSync } = {}) {
+export function executeReadOnlySql(sql, { psql = 'psql', env = process.env, runner = spawnSync } = {}) {
   if (!env.PGDATABASE) throw new Error('Defina PGDATABASE explicitamente antes de consultar a base.');
   const result = runner(psql, ['-X', '-q', '-A', '-t', '-w', '-v', 'ON_ERROR_STOP=1', '-f', '-'], {
-    input: readFileSync(sqlPath, 'utf8'),
+    input: sql,
     encoding: 'utf8', shell: false, windowsHide: true,
     timeout: 180_000, maxBuffer: 32 * 1024 * 1024,
     env: { ...env, PGCLIENTENCODING: 'UTF8', PGCONNECT_TIMEOUT: '10' }
@@ -48,7 +48,11 @@ export function collectDatabase({ psql = 'psql', env = process.env, runner = spa
     // Nao imprimir stderr: mensagens de conexao podem conter parametros privados.
     throw new Error(`psql encerrou com código ${result.status ?? 'indisponível'}. Confira conexão, autenticação, permissões e compatibilidade SQL. Nenhum relatório foi gerado.`);
   }
-  return parseCollection(result.stdout);
+  return result.stdout;
+}
+
+export function collectDatabase(options = {}) {
+  return parseCollection(executeReadOnlySql(readFileSync(sqlPath, 'utf8'), options));
 }
 
 export function buildReport(records, { demo = false, now = new Date() } = {}) {
@@ -73,7 +77,7 @@ export function buildReport(records, { demo = false, now = new Date() } = {}) {
     findings, tables, columns, constraints, indexes };
 }
 
-function cell(value) {
+export function cell(value) {
   return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
     .replaceAll('|', '&#124;').replaceAll('`', '&#96;').replaceAll('*', '&#42;')
     .replaceAll('_', '&#95;').replaceAll('[', '&#91;').replaceAll(']', '&#93;')

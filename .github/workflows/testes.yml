@@ -19,6 +19,46 @@ jobs:
         with:
           node-version: '22'
       - name: Testar lógica e tratamento de falhas
-        run: node --test testes/diagnostico.test.js
+        run: node --test testes/diagnostico.test.js testes/qualidade.test.js
       - name: Executar demonstração sintética
         run: node src/cli.js --demo
+      - name: Executar demonstração de qualidade
+        run: node src/qualidade-cli.js --demo
+
+  postgres:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        postgres: ['14', '16']
+    services:
+      postgres:
+        image: postgres:${{ matrix.postgres }}
+        env:
+          POSTGRES_DB: ecidade_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: senha_sintetica_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d ecidade_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGDATABASE: ecidade_test
+      PGUSER: postgres
+      PGPASSWORD: senha_sintetica_ci
+      ECIDADE_TEST_DB: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar cliente PostgreSQL
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Criar massa sintética em banco descartável
+        run: psql -X -w -v ON_ERROR_STOP=1 -f testes/fixtures/base-sintetica.sql
+      - name: Testar consultas no PostgreSQL
+        run: node --test testes/integracao/postgres.test.js

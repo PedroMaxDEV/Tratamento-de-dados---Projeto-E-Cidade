@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "rules": [
+    { "id": "nome_obrigatorio", "type": "not_blank", "schema": "ecidade_qa", "table": "pessoa", "columns": ["nome"] },
+    { "id": "nome_unico_exemplo", "type": "unique", "schema": "ecidade_qa", "table": "pessoa", "columns": ["nome"] },
+    { "id": "cidade_obrigatoria", "type": "not_null", "schema": "ecidade_qa", "table": "pessoa", "columns": ["cidade_id"] },
+    { "id": "cidade_existente", "type": "foreign_key", "schema": "ecidade_qa", "table": "pessoa", "columns": ["cidade_id"], "reference": { "schema": "ecidade_qa", "table": "cidade", "columns": ["id"] } }
+  ]
+}

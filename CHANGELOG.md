@@ -2,6 +2,17 @@
 
 Registrar entregas reais, indicando separadamente implementação e validação. Não marcar uma correção como concluída antes de executá-la e conferir o resultado.
 
+## 2026-10-27 — 0.2.0 — Regras de qualidade
+
+- Implementadas regras not_null, not_blank, unique e foreign_key configuradas por JSON.
+- Adicionados suporte a chaves compostas, exportação de SQL para revisão e relatórios de contagens sem amostras de registros.
+- Validadas configurações e preservada a precisão de contagens grandes.
+- Incluídos modo demonstrativo, 11 testes adicionais locais e cinco testes de integração opt-in com massa sintética.
+- Configurado GitHub Actions com PostgreSQL 14 e 16 para validar consultas reais após o push.
+- Adicionado texto de publicação em `updates/003-qualidade-dados.md`.
+
+Validação local: 19 testes passaram; demonstração de qualidade executada. Cinco testes de integração pulados por ausência do banco local. GitHub Actions e base real do e-Cidade ainda não validados. Nenhum tratamento foi aplicado à base real.
+
 ## 2026-10-27 — 0.1.0 — Diagnóstico executável
 
 - Implementada CLI Node.js sem dependências externas, com modo demonstrativo.

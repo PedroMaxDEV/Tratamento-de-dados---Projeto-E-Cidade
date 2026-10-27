@@ -8,16 +8,19 @@ Objetivo da equipe: diagnosticar a base PostgreSQL do e-Cidade, propor tratament
 
 Já existe uma ferramenta executável de diagnóstico em Node.js, com geração de relatórios JSON/Markdown, modo demonstrativo e testes automatizados. Nenhuma base real foi restaurada ou alterada. A coleta SQL ainda precisa ser validada na cópia de desenvolvimento do e-Cidade.
 
+A versão 0.2.0 também oferece regras configuráveis de qualidade: nulos, textos vazios, duplicidades e referências sem correspondência. Veja o [guia de qualidade](docs/QUALIDADE_DE_DADOS.md) e o [texto da atualização 003](updates/003-qualidade-dados.md).
+
 ## Executar o código agora
 
 Com Node.js 22 ou superior, na pasta do projeto:
 
 ```powershell
 node src/cli.js --demo
-node --test testes/diagnostico.test.js
+node src/qualidade-cli.js --demo
+node --test testes/diagnostico.test.js testes/qualidade.test.js
 ```
 
-Não é necessário instalar pacotes. O primeiro comando gera relatórios com **metadados sintéticos**, em uma subpasta exclusiva de `resultados-locais/`. O segundo executa os testes automatizados.
+Não é necessário instalar pacotes. Os dois primeiros comandos geram relatórios **sintéticos**, em subpastas exclusivas de `resultados-locais/`. O terceiro executa os 19 testes automatizados locais. Cinco testes adicionais de integração foram preparados para o GitHub com PostgreSQL 14 e 16; ainda não foram executados nesta máquina.
 
 Para conectar a uma base PostgreSQL, siga [o guia da ferramenta](docs/FERRAMENTA_DIAGNOSTICO.md). Ela consulta metadados em transação somente leitura e não executa correções.
 
@@ -30,17 +33,19 @@ Para conectar a uma base PostgreSQL, siga [o guia da ferramenta](docs/FERRAMENTA
 - [Ambiente e versão de referência](docs/AMBIENTE.md)
 - [Dicionário de dados para preencher](docs/DICIONARIO_DE_DADOS.md)
 - [Regras para contribuir](CONTRIBUTING.md)
-- [Título e descrição desta atualização](updates/002-diagnostico.md)
+- [Atualização 002 — diagnóstico](updates/002-diagnostico.md)
+- [Atualização 003 — qualidade](updates/003-qualidade-dados.md)
 
 ## Comece por aqui
 
-Esta pasta pode ser publicada como o repositório auxiliar da equipe. A segunda entrega acrescenta o diagnóstico executável; não representa uma correção aplicada ao e-Cidade.
+Esta pasta pode ser publicada como o repositório auxiliar da equipe. A terceira entrega acrescenta regras de qualidade executáveis; não representa uma correção aplicada ao e-Cidade.
 
 Leia `docs/PUBLICAR_NO_GITHUB.md` para fazer o primeiro envio e os próximos commits. Depois, preencha `docs/AMBIENTE.md`, escolha o módulo piloto e execute o diagnóstico em uma base de desenvolvimento.
 
 ```text
 .github/              Modelos de issues e pull requests
 src/                  Ferramenta executável de diagnóstico
+config/               Exemplo de configuração de regras
 docs/                 Plano, ambiente, dicionário e integração
 modelos/              Fichas para documentar cada tratamento
 relatorios/           Evidências revisadas, sem dados pessoais
