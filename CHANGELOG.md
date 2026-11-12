@@ -2,6 +2,27 @@
 
 Registrar entregas reais, indicando separadamente implementação e validação. Não marcar uma correção como concluída antes de executá-la e conferir o resultado.
 
+## 2026-11-12 — Piloto no cadastro CGM
+
+- Configuradas verificações de nome preenchido e presença e unicidade do número do cadastro na tabela `protocolo.cgm`.
+- Documentadas as definições de referência, a execução via `psql` e o caminho para bancos acessíveis somente pelo Docker.
+- Exercitada a configuração com registros fictícios em PostgreSQL em memória. Medição na base da aplicação pendente.
+
+## 2026-11-12 — Demonstração do tratamento
+
+- Adicionado `npm run apresentar` para executar o laboratório SQL com PGlite e gerar comparações do tratamento e da reversão.
+- Medidas 3 violações antes, 0 depois e 3 após a reversão. Os valores originais foram conferidos linha por linha.
+- Documentados o roteiro da apresentação, os arquivos que podem entrar no fork da turma e o próximo marco de validação no e-Cidade.
+
+## 2026-10-27 — Laboratório SQL reversível
+
+- Criado cenário independente com dados fictícios e scripts de preparação, tratamento e reversão.
+- Preservados valores originais e protegida a reversão contra edições posteriores.
+- Adicionado teste integrado que verifica diagnóstico, comparação, reaplicação recusada, conflito de reversão e restauração exata.
+- Incluído Compose de laboratório e upload de relatórios sintéticos no GitHub Actions.
+
+Validação local: sintaxe JavaScript verificada; cenário integrado pulado por falta do PostgreSQL. Confirmação funcional pendente dos jobs remotos após publicação. Nenhuma base real modificada.
+
 ## 2026-10-27 — 0.3.0 — Comparação antes e depois
 
 - Implementada comparação entre relatórios de qualidade com classificação de variações e resultados inconclusivos.

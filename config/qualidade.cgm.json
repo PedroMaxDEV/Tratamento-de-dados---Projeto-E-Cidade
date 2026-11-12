@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "rules": [
+    { "id": "cgm_nome_preenchido", "type": "not_blank", "schema": "protocolo", "table": "cgm", "columns": ["z01_nome"] },
+    { "id": "cgm_identificador_presente", "type": "not_null", "schema": "protocolo", "table": "cgm", "columns": ["z01_numcgm"] },
+    { "id": "cgm_identificador_unico", "type": "unique", "schema": "protocolo", "table": "cgm", "columns": ["z01_numcgm"] }
+  ]
+}

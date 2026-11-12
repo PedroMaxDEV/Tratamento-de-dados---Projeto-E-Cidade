@@ -2,6 +2,10 @@
 
 Projeto acadêmico de Engenharia de Software — T01, 2026.2.
 
+Para mostrar o trabalho em aula, rode `npm ci --ignore-scripts` e `npm run apresentar`. O laboratório executa o SQL em memória e gera relatórios de tratamento e reversão. [Roteiro de três minutos e situação da integração](docs/APRESENTACAO.md).
+
+O primeiro diagnóstico preparado para uma tabela do e-Cidade verifica nomes e identificadores do Cadastro Geral do Município. [Piloto CGM](docs/PILOTO_CGM.md).
+
 Objetivo da equipe: diagnosticar a base PostgreSQL do e-Cidade, propor tratamentos fundamentados e entregar alterações reproduzíveis que possam ser integradas às frentes de atualização do PHP e migração para Laravel.
 
 ## Estado desta entrega
@@ -11,6 +15,8 @@ Já existe uma ferramenta executável de diagnóstico em Node.js, com geração 
 A versão 0.2.0 também oferece regras configuráveis de qualidade: nulos, textos vazios, duplicidades e referências sem correspondência. Veja o [guia de qualidade](docs/QUALIDADE_DE_DADOS.md) e o [texto da atualização 003](updates/003-qualidade-dados.md).
 
 A versão 0.3.0 acrescenta [comparação de relatórios antes e depois](docs/COMPARAR_RELATORIOS.md), com identificação de reduções, aumentos e resultados inconclusivos. [Texto da atualização 005](updates/005-comparacao-relatorios.md).
+
+Também há um [laboratório de tratamento SQL reversível](laboratorio/README.md), com massa fictícia, scripts transacionais, comparação e teste de restauração dos valores originais. O novo cenário será validado pelo GitHub em PostgreSQL 14 e 16 após a publicação. [Texto da atualização 006](updates/006-laboratorio-reversivel.md).
 
 ## Executar o código agora
 

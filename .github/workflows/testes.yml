@@ -26,6 +26,10 @@ jobs:
         run: node src/qualidade-cli.js --demo
       - name: Demonstrar comparação antes e depois
         run: node src/comparacao-cli.js --demo
+      - name: Instalar dependência da apresentação
+        run: npm ci --ignore-scripts
+      - name: Executar tratamento SQL e reversão em memória
+        run: npm run apresentar
 
   postgres:
     runs-on: ubuntu-latest
@@ -65,3 +69,12 @@ jobs:
         run: psql -X -w -v ON_ERROR_STOP=1 -f testes/fixtures/base-sintetica.sql
       - name: Testar consultas no PostgreSQL
         run: node --test testes/integracao/postgres.test.js
+      - name: Validar tratamento e reversão no laboratório sintético
+        run: node --test testes/integracao/laboratorio.test.js
+      - name: Guardar relatórios sintéticos do laboratório
+        uses: actions/upload-artifact@v4
+        with:
+          name: laboratorio-postgres-${{ matrix.postgres }}
+          path: resultados-locais/laboratorio/
+          if-no-files-found: error
+          retention-days: 14

@@ -4,7 +4,9 @@
   "private": true,
   "description": "Diagnóstico somente leitura do PostgreSQL para a equipe e-Cidade",
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "diagnostico": "node src/cli.js",
     "demo": "node src/cli.js --demo",
@@ -12,6 +14,11 @@
     "demo:qualidade": "node src/qualidade-cli.js --demo",
     "comparar": "node src/comparacao-cli.js",
     "test": "node --test testes/diagnostico.test.js testes/qualidade.test.js testes/comparacao.test.js",
-    "test:integracao": "node --test testes/integracao/postgres.test.js"
+    "test:integracao": "node --test testes/integracao/postgres.test.js",
+    "test:laboratorio": "node --test testes/integracao/laboratorio.test.js",
+    "apresentar": "node laboratorio/apresentar.js"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.16"
   }
 }

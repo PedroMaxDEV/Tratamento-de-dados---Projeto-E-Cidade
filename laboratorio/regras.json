@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "rules": [
+    { "id": "nome_preenchido", "type": "not_blank", "schema": "ecidade_lab", "table": "pessoa", "columns": ["nome"] }
+  ]
+}
